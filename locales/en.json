@@ -1,5 +1,10 @@
 {
   "helloworld": {
     "hi": "Hi, world!"
+  },
+  "nav": {
+    "alt": "Cambiar Idioma al Español",
+    "en": "English",
+    "es": "Español"
   }
 }
