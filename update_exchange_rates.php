@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 try {
     // --- Configuration ---
     // The env file is expected to be two directories above this script's location.
-    $env_path = dirname(__DIR__, 2) . '/.vuela-con-puntos-aeromexico';
+    $env_path = __DIR__ . '/.vuela-con-puntos-aeromexico';
 
     if (!file_exists($env_path)) {
         throw new Exception("Environment file not found: " . $env_path);

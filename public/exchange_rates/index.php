@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 
 // --- Database Configuration ---
-$env_path = dirname(__DIR__, 4) . '/.vuela-con-puntos-aeromexico';
+$env_path = dirname(__DIR__, 3) . '/.vuela-con-puntos-aeromexico';
 
 try {
     if (!file_exists($env_path)) {
@@ -27,7 +27,7 @@ try {
     }
 
     // SQL query to get the latest exchange rate
-    $sql = "SELECT rate, timestamp FROM exchange_rates ORDER BY id DESC LIMIT 1";
+    $sql = "SELECT rate, UNIX_TIMESTAMP(timestamp) AS timestamp FROM exchange_rates ORDER BY id DESC LIMIT 1";
     $result = $conn->query($sql);
 
     if ($result && $result->num_rows > 0) {
