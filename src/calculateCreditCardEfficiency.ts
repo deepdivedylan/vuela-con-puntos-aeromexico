@@ -69,7 +69,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             categoryBased: false
         },
         {
-            name: "Santander Blanca",
+            name: "Santander Aeroméxico Blanca",
             bank: "Santander",
             annualFee: 0,
             feeCurrency: "MXN",
@@ -89,7 +89,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             }
         },
         {
-            name: "Santander Platino",
+            name: "Santander Aeroméxico Platino",
             bank: "Santander",
             annualFee: 4000,
             feeCurrency: "MXN",
@@ -109,7 +109,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             }
         },
         {
-            name: "Santander Negra",
+            name: "Santander Aeroméxico Negra",
             bank: "Santander",
             annualFee: 6000,
             feeCurrency: "MXN",
