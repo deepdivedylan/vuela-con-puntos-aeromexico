@@ -1,20 +1,16 @@
 <template>
-  <HelloWorld />
+  <div class="p-8 max-w-5xl mx-auto">
+    <div class="flex justify-end mb-4">
+      <LocaleSelect />
+    </div>
+    <Introduction />
+    <CreditCardCalculator />
+    <Footer />
+  </div>
 </template>
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import calculateCreditCardEfficiency from './calculateCreditCardEfficiency.ts';
-const result = calculateCreditCardEfficiency({
-  spending: {
-    aeromexicoTickets: 50000,
-    airlineTickets: 25000,
-    foreignSpending: 50000,
-    restaurants: 100000,
-    hotels: 50000,
-    other: 250000
-  },
-  usdToMxnRate: 18.03,
-  includeWelcomeOffers: true
-});
-console.log(JSON.stringify(result, null, 2));
+import CreditCardCalculator from './components/CreditCardCalculator.vue';
+import Introduction from './components/Introduction.vue';
+import LocaleSelect from './components/LocaleSelect.vue';
+import Footer from './components/Footer.vue';
 </script>

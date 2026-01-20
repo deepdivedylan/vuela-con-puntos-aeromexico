@@ -1,10 +1,38 @@
 {
-  "helloworld": {
-    "hi": "¡Hola, mundo!"
-  },
   "nav": {
     "alt": "Change Language to English",
     "en": "English",
     "es": "Español"
+  },
+  "creditcardcalculator": {
+    "title": "Vuela GRATIS con Puntos Aeroméxico 💳",
+    "spending_title": "Gastos Mensuales (MXN) 💸",
+    "aeromexicoTickets": "Boletos Aeroméxico",
+    "airlineTickets": "Otros Boletos de Avión",
+    "foreignSpending": "Gastos en el Extranjero",
+    "restaurants": "Restaurantes",
+    "hotels": "Hoteles",
+    "other": "Otros Gastos",
+    "options_title": "Opciones 🎛️",
+    "usdToMxnRate": "Tipo de Cambio USD a MXN",
+    "includeWelcomeOffers": "¿Incluir Ofertas de Bienvenida?",
+    "calculate_button": "Calcular",
+    "results_title": "Resultados",
+    "table_rank": "Clasificación",
+    "table_card": "Tarjeta",
+    "table_bank": "Banco",
+    "table_points": "Puntos Totales",
+    "table_cost_per_point": "Costo por Punto",
+    "table_effective_annual_fee": "Cuota Anual Efectiva (MXN)",
+    "start_journey_prompt": "¿Listo para volar? ¡Ingresa tus gastos para comenzar!",
+    "exchange_rate_date": "1 USD = {apiRate} MXN al {apiDate}"
+  },
+  "introduction": {
+    "what_is_this": "¿Qué es ésto?",
+    "explanation": "¿Listo para maximizar tus recompensas de viaje? ¡Bienvenido a nuestra Calculadora de Puntos de Tarjetas de Crédito Mexicanas, la herramienta definitiva para viajeros inteligentes que buscan ganar puntos de Aeroméxico de forma más rápida y eficiente! Nuestra calculadora analiza las principales tarjetas de crédito mexicanas de BBVA, Santander, Inbursa y American Express para revelarte cuál te dará más puntos de Aeroméxico según tus patrones únicos de gasto. Simplemente ingresa tu gasto típico en diferentes categorías, y te mostraremos instantáneamente qué tarjeta ofrece el mejor valor, incluyendo bonificaciones de bienvenida y cuotas anuales. Ya sea que estés planeando aventuras internacionales o escapadas nacionales, nuestra herramienta te ayuda a elegir la tarjeta perfecta para convertir tus compras cotidianas en tu próxima vacación de ensueño con Aeroméxico. ¡Comienza a optimizar tu estrategia de puntos hoy mismo!"
+  },
+  "footer": {
+    "copyright": "© {year} <a href=\"https://www.deepdivedylan.io\" target=\"_blank\" class=\"underline hover:text-gray-900\">Deep Dive Dylan</a>. Todos los derechos reservados.",
+    "privacy_statement": "Se respeta tu privacidad. Ninguna información personal o datos de gastos se recopilan, almacenan o transmiten desde tu dispositivo."
   }
 }

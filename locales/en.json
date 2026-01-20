@@ -1,10 +1,38 @@
 {
-  "helloworld": {
-    "hi": "Hi, world!"
-  },
   "nav": {
     "alt": "Cambiar Idioma al Español",
     "en": "English",
     "es": "Español"
+  },
+  "creditcardcalculator": {
+    "title": "Fly FREE With Aeromexico Points 💳",
+    "spending_title": "Monthly Spending (MXN) 💸",
+    "aeromexicoTickets": "Aeromexico Tickets",
+    "airlineTickets": "Other Airline Tickets",
+    "foreignSpending": "Foreign Spending",
+    "restaurants": "Restaurants",
+    "hotels": "Hotels",
+    "other": "Other Spending",
+    "options_title": "Options 🎛️",
+    "usdToMxnRate": "USD to MXN Exchange Rate",
+    "includeWelcomeOffers": "Include Welcome Offers?",
+    "calculate_button": "Calculate",
+    "results_title": "Results",
+    "table_rank": "Rank",
+    "table_card": "Card",
+    "table_bank": "Bank",
+    "table_points": "Total Points",
+    "table_cost_per_point": "Cost per Point",
+    "table_effective_annual_fee": "Effective Annual Fee (MXN)",
+    "start_journey_prompt": "Ready to fly? Enter your spending to begin!",
+    "exchange_rate_date": "1 USD = {apiRate} MXN as of {apiDate}"
+  },
+  "introduction": {
+    "what_is_this": "What is this?",
+    "explanation": "Ready to maximize your travel rewards? Welcome to our Mexican Credit Card Points Calculator, the ultimate tool for savvy travelers looking to earn Aeroméxico points faster and smarter! Our calculator analyzes major Mexican credit cards from BBVA, Santander, Inbursa, and American Express to reveal which card will give you the most Aeroméxico points based on your unique spending patterns. Simply enter your typical spending in different categories, and we'll instantly show you which card offers the best value, including welcome bonuses and annual fees. Whether you're planning international adventures or domestic getaways, our tool helps you choose the perfect card to turn your everyday purchases into your next dream vacation with Aeroméxico. Start optimizing your points strategy today!"
+  },
+  "footer": {
+    "copyright": "© {year} <a href=\"https://www.deepdivedylan.io\" target=\"_blank\" class=\"underline hover:text-gray-900\">Deep Dive Dylan</a>. All rights reserved.",
+    "privacy_statement": "Your privacy is respected. No personal information or spending data is ever collected, stored, or transmitted from your device."
   }
 }

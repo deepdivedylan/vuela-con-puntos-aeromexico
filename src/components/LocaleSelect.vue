@@ -1,16 +1,16 @@
 <template>
-  <div class="h-6 cursor-pointer flex" @click="selectLocale">
-    <div class="pr-3">
+  <div class="cursor-pointer flex items-center p-2 border border-gray-300 rounded-md shadow-sm hover:bg-gray-100" @click="selectLocale">
+    <div class="pr-2">
       <img class="h-6" :src="'/images/flag-' + otherLocale + '.svg'" :alt="$t('nav.alt')" />
     </div>
-    <div>
+    <div class="text-sm font-medium">
       {{ $t('nav.' + otherLocale) }}
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import { Ref, ref } from 'vue';
+import { type Ref, ref } from 'vue';
 import { useStorage } from '@vueuse/core';
 
 const { availableLocales, locale } = useI18n({ useScope: 'global' });
@@ -19,9 +19,9 @@ const getOtherLocale = (): string => {
   return result ? result : '';
 };
 const setLocaleToHtmlTag = () => {
-  const tags = document.getElementsByTagName('html');
-  if (tags.length === 1) {
-    tags[0].lang = locale.value;
+  const htmlTag = document.getElementsByTagName('html')[0];
+  if (htmlTag) {
+    htmlTag.lang = locale.value;
   }
 };
 setLocaleToHtmlTag();
