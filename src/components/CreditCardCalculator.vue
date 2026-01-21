@@ -30,6 +30,10 @@
               <input type="number" id="other" v-model.number="params.spending.other" @keyup="calculate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
           </div>
+          <div class="mt-4 pt-4 border-t text-right">
+            <span class="font-medium text-gray-700">{{ $t('creditcardcalculator.total_spending') }}: </span>
+            <span class="text-lg font-bold text-gray-900">{{ totalSpending.toLocaleString() }} MXN</span>
+          </div>
         </fieldset>
 
         <fieldset class="border p-4 rounded-md">
@@ -39,7 +43,7 @@
             <div>
               <label for="usdToMxnRate" class="block text-sm font-medium text-gray-700">{{ $t('creditcardcalculator.usdToMxnRate') }}</label>
               <input type="number" step="0.01" id="usdToMxnRate" v-model.number="params.usdToMxnRate" @keyup="calculate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-              <p class="mt-1 text-xs text-gray-500">{{ $t('creditcardcalculator.exchange_rate_date', { apiRate, apiDate }) }}</p>
+              <p class="mt-1 text-xs text-gray-500" v-if="exchangeRateTimeInfo.timeUnitKey && exchangeRateTimeInfo.timeElapsed >= 0">{{ $t('creditcardcalculator.exchange_rate_info', { apiRate: apiRate, timeElapsed: exchangeRateTimeInfo.timeElapsed, timeUnit: $t(exchangeRateTimeInfo.timeUnitKey, exchangeRateTimeInfo.timeElapsed) }) }}</p>
             </div>
             <div class="flex items-center pt-5">
               <input type="checkbox" id="includeWelcomeOffers" v-model="params.includeWelcomeOffers" @change="calculate" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
@@ -51,7 +55,7 @@
       </div>
     </form>
 
-    <div v-if="results" class="mt-10">
+    <div v-if="totalSpending > 0 && results" class="mt-10">
       <h2 class="text-xl font-bold mb-4">{{ $t('creditcardcalculator.results_title') }}</h2>
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
@@ -84,12 +88,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import calculateCreditCardEfficiency from '../calculateCreditCardEfficiency.ts';
 import type CreditCardEfficiencyResult from '../interfaces/CreditCardEfficiencyResult.ts';
 
-const apiRate = ref(18.03);
-const apiDate = ref(new Date(2063, 3, 5).toLocaleDateString());
+const apiRate = ref(17.01);
+const apiTimestamp = ref(new Date(2063, 3, 5).getTime() / 1000);
 
 const params = ref({
   spending: {
@@ -100,8 +104,33 @@ const params = ref({
     hotels: 0,
     other: 0,
   },
-  usdToMxnRate: 18.03,
+  usdToMxnRate: 17.01,
   includeWelcomeOffers: false,
+});
+
+const totalSpending = computed(() => {
+  return Object.values(params.value.spending).reduce((sum, value) => sum + (Number(value) || 0), 0);
+});
+
+const exchangeRateTimeInfo = computed(() => {
+  if (!apiTimestamp.value) {
+    return { timeElapsed: 0, timeUnitKey: '' };
+  }
+  const now = Date.now();
+  const lastUpdate = apiTimestamp.value * 1000;
+  const diffHours = Math.round((now - lastUpdate) / (1000 * 60 * 60));
+
+  if (diffHours < 24) {
+    return {
+      timeElapsed: diffHours,
+      timeUnitKey: 'creditcardcalculator.time_unit_hours'
+    };
+  } else {
+    return {
+      timeElapsed: Math.round(diffHours / 24),
+      timeUnitKey: 'creditcardcalculator.time_unit_days'
+    };
+  }
 });
 
 onMounted(async () => {
@@ -113,8 +142,8 @@ onMounted(async () => {
     const data = await response.json();
     
     apiRate.value = data.rate;
-    // The timestamp is a Unix timestamp (seconds). JS Date constructor needs milliseconds.
-    apiDate.value = new Date(data.timestamp * 1000).toLocaleDateString(); 
+    // The timestamp is a Unix timestamp (seconds).
+    apiTimestamp.value = data.timestamp;
     params.value.usdToMxnRate = data.rate;
   } catch (error) {
     console.error('Failed to fetch exchange rate:', error);

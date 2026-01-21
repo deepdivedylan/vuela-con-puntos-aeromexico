@@ -13,6 +13,7 @@
     "restaurants": "Restaurants",
     "hotels": "Hotels",
     "other": "Other Spending",
+    "total_spending": "🤑 Total Spending",
     "options_title": "Options 🎛️",
     "usdToMxnRate": "USD to MXN Exchange Rate",
     "includeWelcomeOffers": "Include Welcome Offers?",
@@ -25,7 +26,9 @@
     "table_cost_per_point": "Cost per Point",
     "table_effective_annual_fee": "Effective Annual Fee (MXN)",
     "start_journey_prompt": "Ready to fly? Enter your spending to begin!",
-    "exchange_rate_date": "1 USD = {apiRate} MXN as of {apiDate}"
+    "exchange_rate_info": "1 USD = {apiRate} MXN ({timeElapsed} {timeUnit} ago)",
+    "time_unit_hours": "hour | hours",
+    "time_unit_days": "day | days"
   },
   "introduction": {
     "what_is_this": "What is this?",
