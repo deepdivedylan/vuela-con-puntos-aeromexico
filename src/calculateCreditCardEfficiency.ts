@@ -26,56 +26,11 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
     );
 
     // Constants
-    const BBVA_TO_AEROMEXICO = 1.6; // 1.6 BBVA points = 1 Aeroméxico point
     const INBURSA_TO_AEROMEXICO = 1; // 1 Inbursa point = 1 Aeroméxico point (can be adjusted for promotions)
     const IVA_TAX_RATE = 1.16; // 16% IVA tax
 
     // Card definitions
     const cards: Card[] = [
-        {
-            name: "BBVA Azúl",
-            bank: "BBVA",
-            logo: "/images/bbva.svg",
-            earnRatePercent: 9, // 9% BBVA points per MXN
-            annualFee: 748,
-            feeCurrency: "MXN",
-            directAeromexico: false,
-            categoryBased: false,
-            active: true
-        },
-        {
-            name: "BBVA Oro",
-            bank: "BBVA",
-            logo: "/images/bbva.svg",
-            earnRatePercent: 11,
-            annualFee: 1151,
-            feeCurrency: "MXN",
-            directAeromexico: false,
-            categoryBased: false,
-            active: true
-        },
-        {
-            name: "BBVA Platino",
-            bank: "BBVA",
-            logo: "/images/bbva.svg",
-            earnRatePercent: 15,
-            annualFee: 2579,
-            feeCurrency: "MXN",
-            directAeromexico: false,
-            categoryBased: false,
-            active: true
-        },
-        {
-            name: "BBVA Negra",
-            bank: "BBVA",
-            logo: "/images/bbva.svg",
-            earnRatePercent: 23,
-            annualFee: 6247,
-            feeCurrency: "MXN",
-            directAeromexico: false,
-            categoryBased: false,
-            active: true
-        },
         {
             name: "Santander Aeroméxico Blanca",
             bank: "Santander",
@@ -405,11 +360,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         let totalCost = totalSpendMXN + effectiveAnnualFeeMXN;
 
         // Calculate regular points
-        if (card.bank === "BBVA") {
-            const earnRate = card.earnRatePercent || 0;
-            const bbvaPoints = totalSpendMXN * (earnRate / 100);
-            totalPoints = bbvaPoints / BBVA_TO_AEROMEXICO;
-        } else if (card.categoryBased) {
+        if (card.categoryBased) {
             let cardPoints = 0;
 
             // Process each spending category
@@ -498,13 +449,11 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         usdToMxnRate: usdToMxnRate,
         ivaTaxRate: IVA_TAX_RATE,
         conversionRates: {
-            BBVA_TO_AEROMEXICO: BBVA_TO_AEROMEXICO,
             INBURSA_TO_AEROMEXICO: INBURSA_TO_AEROMEXICO
         },
         includeWelcomeOffers: includeWelcomeOffers,
         exchangeRate: {
-            USD_TO_MXN: usdToMxnRate,
-            BBVA_TO_AEROMEXICO: BBVA_TO_AEROMEXICO
+            USD_TO_MXN: usdToMxnRate
         },
         cards: rankedResults,
         bestOption: bestOption
