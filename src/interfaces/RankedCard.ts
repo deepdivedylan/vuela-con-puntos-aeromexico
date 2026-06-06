@@ -1,6 +1,7 @@
 export default interface RankedCard {
     name: string;
     bank: string;
+    logo: string;
     annualFee: number;
     feeCurrency: string;
     annualFeeMXN: number;

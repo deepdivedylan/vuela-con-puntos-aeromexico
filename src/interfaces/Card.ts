@@ -5,6 +5,7 @@ import type WelcomeOffer from './WelcomeOffer.ts';
 export default interface Card {
     name: string;
     bank: 'BBVA' | 'Santander' | 'Inbursa' | 'American Express' | string;
+    logo: string;
     earnRatePercent?: number; // For BBVA cards
     annualFee: number;
     feeCurrency: 'MXN' | 'USD';

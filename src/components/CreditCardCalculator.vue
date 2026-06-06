@@ -73,7 +73,12 @@
             <tr v-for="card in results.cards" :key="card.name" class="hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ card.rank }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ card.name }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ card.bank }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <div class="flex items-center gap-2">
+                  <img :src="card.logo" :alt="card.bank" class="h-[1em] w-auto" />
+                  <span>{{ card.bank }}</span>
+                </div>
+              </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ card.totalAeromexicoPoints.toLocaleString() }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ card.costPerPoint }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ card.effectiveAnnualFeeMXN.toLocaleString() }}</td>

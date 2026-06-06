@@ -35,6 +35,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "BBVA Azúl",
             bank: "BBVA",
+            logo: "/images/bbva.svg",
             earnRatePercent: 9, // 9% BBVA points per MXN
             annualFee: 748,
             feeCurrency: "MXN",
@@ -44,6 +45,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "BBVA Oro",
             bank: "BBVA",
+            logo: "/images/bbva.svg",
             earnRatePercent: 11,
             annualFee: 1151,
             feeCurrency: "MXN",
@@ -53,6 +55,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "BBVA Platino",
             bank: "BBVA",
+            logo: "/images/bbva.svg",
             earnRatePercent: 15,
             annualFee: 2579,
             feeCurrency: "MXN",
@@ -62,6 +65,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "BBVA Negra",
             bank: "BBVA",
+            logo: "/images/bbva.svg",
             earnRatePercent: 23,
             annualFee: 6247,
             feeCurrency: "MXN",
@@ -71,6 +75,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Santander Aeroméxico Blanca",
             bank: "Santander",
+            logo: "/images/santander.svg",
             annualFee: 0,
             feeCurrency: "MXN",
             directAeromexico: true,
@@ -91,6 +96,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Santander Aeroméxico Platino",
             bank: "Santander",
+            logo: "/images/santander.svg",
             annualFee: 4000,
             feeCurrency: "MXN",
             directAeromexico: true,
@@ -111,6 +117,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Santander Aeroméxico Negra",
             bank: "Santander",
+            logo: "/images/santander.svg",
             annualFee: 6000,
             feeCurrency: "MXN",
             directAeromexico: true,
@@ -132,6 +139,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Inbursa Black",
             bank: "Inbursa",
+            logo: "/images/inbursa.svg",
             annualFee: 2500,
             feeCurrency: "MXN",
             directAeromexico: false,
@@ -148,6 +156,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Inbursa Clásica",
             bank: "Inbursa",
+            logo: "/images/inbursa.svg",
             annualFee: 390,
             feeCurrency: "MXN",
             directAeromexico: false,
@@ -164,6 +173,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Inbursa Oro",
             bank: "Inbursa",
+            logo: "/images/inbursa.svg",
             annualFee: 540,
             feeCurrency: "MXN",
             directAeromexico: false,
@@ -180,6 +190,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "Inbursa Platino",
             bank: "Inbursa",
+            logo: "/images/inbursa.svg",
             annualFee: 1320,
             feeCurrency: "MXN",
             directAeromexico: false,
@@ -196,6 +207,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "American Express Aeroméxico Azúl",
             bank: "American Express",
+            logo: "/images/american-express.svg",
             annualFee: 160,
             feeCurrency: "USD",
             directAeromexico: true,
@@ -215,6 +227,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "American Express Aeroméxico Oro",
             bank: "American Express",
+            logo: "/images/american-express.svg",
             annualFee: 540,
             feeCurrency: "USD",
             directAeromexico: true,
@@ -235,6 +248,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         {
             name: "American Express Aeroméxico Platino",
             bank: "American Express",
+            logo: "/images/american-express.svg",
             annualFee: 1300,
             feeCurrency: "USD",
             directAeromexico: true,
@@ -363,6 +377,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         return {
             name: card.name,
             bank: card.bank,
+            logo: card.logo,
             annualFee: card.annualFee,
             feeCurrency: card.feeCurrency,
             annualFeeMXN: Math.round(annualFeeMXN), // Now includes IVA

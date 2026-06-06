@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="25.446428"
+   height="24"
+   viewBox="0 0 25.446428 24"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="logo-santander.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="39.229167"
+     inkscape:cx="17.92034"
+     inkscape:cy="17.295805"
+     inkscape:window-width="3774"
+     inkscape:window-height="2091"
+     inkscape:window-x="1986"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="logo-santander" />
+  <title
+     id="title1">logo-santander</title>
+  <g
+     id="logo-santander"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     transform="translate(-13,-8)">
+    <rect
+       fill="#transparent"
+       x="0"
+       y="0"
+       width="48"
+       height="48"
+       id="rect1" />
+    <g
+       transform="translate(13,8)"
+       fill="#ec0000"
+       id="g1">
+      <path
+         d="m 12.889683,0 c 0.116571,0.57326419 0.326499,1.1322514 0.630294,1.6539503 v 0 l 3.984069,6.8407063 c 0.45171,0.7754939 0.695865,1.6334584 0.733648,2.4983104 4.265329,1.104537 7.208735,3.45067 7.208735,6.166495 C 25.446429,20.937328 19.750061,24 12.723299,24 5.6963673,24 0,20.937328 0,17.159462 c 0,-2.715657 2.9437444,-5.061119 7.2087342,-6.165824 -0.044731,1.023242 0.1994237,2.056059 0.7338182,2.973483 v 0 l 3.9838986,6.840874 c 0.303795,0.521531 0.513724,1.080518 0.630295,1.653782 v 0 l 0.166553,-0.285876 c 0.986105,-1.693254 0.986105,-3.779378 0,-5.472464 v 0 L 9.5264204,11.213672 C 8.5503118,9.5234416 8.5533616,7.4458838 9.5360781,5.7583405 v 0 L 9.7024622,5.4724642 c 0.11674,0.5732642 0.3264988,1.1322514 0.6302938,1.6539504 v 0 l 4.780916,8.2089484 c 0.303795,0.521699 0.513724,1.080686 0.630294,1.65395 v 0 l 0.166554,-0.285876 c 0.985936,-1.693254 0.985936,-3.779378 0,-5.472464 v 0 L 12.72313,5.7581725 C 11.737194,4.0649184 11.737194,1.9791304 12.723299,0.28587625 v 0"
+         id="path1" />
+    </g>
+  </g>
+  <metadata
+     id="metadata1">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>logo-santander</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
