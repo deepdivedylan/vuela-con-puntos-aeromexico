@@ -144,6 +144,73 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             }
         },
         {
+            name: "Inbursa Aeroméxico Ascend",
+            bank: "Inbursa",
+            logo: "/images/inbursa.svg",
+            annualFee: 1650,
+            feeCurrency: "MXN",
+            directAeromexico: true,
+            categoryBased: true,
+            active: true,
+            earnRatesByCategory: {
+                aeromexicoTickets: 2,
+                other: 1
+            },
+            bonuses: [
+                { threshold: 150000, points: 5000 }
+            ],
+            welcomeOffer: {
+                points: 5000,
+                spendingRequirement: 15000,
+                spendingRequirementCurrency: "MXN"
+            }
+        },
+        {
+            name: "Inbursa Aeroméxico Elevate",
+            bank: "Inbursa",
+            logo: "/images/inbursa.svg",
+            annualFee: 3300,
+            feeCurrency: "MXN",
+            directAeromexico: true,
+            categoryBased: true,
+            active: true,
+            earnRatesByCategory: {
+                aeromexicoTickets: 2.4,
+                other: 1.2
+            },
+            bonuses: [
+                { threshold: 250000, points: 7500 }
+            ],
+            welcomeOffer: {
+                points: 7500,
+                spendingRequirement: 25000,
+                spendingRequirementCurrency: "MXN"
+            }
+        },
+        {
+            name: "Inbursa Aeroméxico Horizon",
+            bank: "Inbursa",
+            logo: "/images/inbursa.svg",
+            annualFee: 8100,
+            feeCurrency: "MXN",
+            directAeromexico: true,
+            categoryBased: true,
+            active: true,
+            earnRatesByCategory: {
+                aeromexicoTickets: 3,
+                other: 2
+            },
+            bonuses: [
+                { threshold: 500000, points: 15000 },
+                { threshold: 750000, points: 15000 }
+            ],
+            welcomeOffer: {
+                points: 30000,
+                spendingRequirement: 50000,
+                spendingRequirementCurrency: "MXN"
+            }
+        },
+        {
             name: "Inbursa Black",
             bank: "Inbursa",
             logo: "/images/inbursa.svg",
@@ -229,10 +296,10 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
                 other: 1.6
             },
             welcomeOffer: {
-                cashback: 1500,
+                cashback: 5000,
                 cashbackCurrency: "MXN",
                 points: 9600,
-                spendingRequirement: 80000,
+                spendingRequirement: 60000,
                 spendingRequirementCurrency: "MXN"
             }
         },
@@ -251,10 +318,10 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
                 other: 1.6
             },
             welcomeOffer: {
-                cashback: 4000,
+                cashback: 8000,
                 cashbackCurrency: "MXN",
                 points: 16000,
-                spendingRequirement: 150000,
+                spendingRequirement: 135000,
                 spendingRequirementCurrency: "MXN"
             }
         },
@@ -273,10 +340,10 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
                 other: 1.6
             },
             welcomeOffer: {
-                cashback: 30000,
+                cashback: 40000,
                 cashbackCurrency: "MXN",
                 points: 32000,
-                spendingRequirement: 400000,
+                spendingRequirement: 350000,
                 spendingRequirementCurrency: "MXN"
             }
         }
