@@ -11,6 +11,7 @@ export default interface Card {
     feeCurrency: 'MXN' | 'USD';
     directAeromexico: boolean;
     categoryBased: boolean;
+    active: boolean;
     earnRatesByCategory?: EarnRatesByCategory;
     bonuses?: Bonus[];
     welcomeOffer?: WelcomeOffer;

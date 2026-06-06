@@ -17,6 +17,7 @@
     "options_title": "Options 🎛️",
     "usdToMxnRate": "USD to MXN Exchange Rate",
     "includeWelcomeOffers": "Include Welcome Offers?",
+    "includeInactiveCards": "Include Inactive Cards?",
     "calculate_button": "Calculate",
     "results_title": "Results",
     "table_rank": "Rank",

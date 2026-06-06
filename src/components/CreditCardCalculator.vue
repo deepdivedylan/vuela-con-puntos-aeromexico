@@ -49,6 +49,10 @@
               <input type="checkbox" id="includeWelcomeOffers" v-model="params.includeWelcomeOffers" @change="calculate" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
               <label for="includeWelcomeOffers" class="ml-2 block text-sm text-gray-900">{{ $t('creditcardcalculator.includeWelcomeOffers') }}</label>
             </div>
+            <div class="flex items-center pt-5">
+              <input type="checkbox" id="includeInactiveCards" v-model="params.includeInactiveCards" @change="calculate" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+              <label for="includeInactiveCards" class="ml-2 block text-sm text-gray-900">{{ $t('creditcardcalculator.includeInactiveCards') }}</label>
+            </div>
           </div>
         </fieldset>
         
@@ -61,27 +65,27 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('creditcardcalculator.table_rank') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('creditcardcalculator.table_card') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('creditcardcalculator.table_bank') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('creditcardcalculator.table_points') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('creditcardcalculator.table_cost_per_point') }}</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ $t('creditcardcalculator.table_effective_annual_fee') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">{{ $t('creditcardcalculator.table_rank') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">{{ $t('creditcardcalculator.table_card') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">{{ $t('creditcardcalculator.table_bank') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">{{ $t('creditcardcalculator.table_points') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">{{ $t('creditcardcalculator.table_cost_per_point') }}</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-800 uppercase tracking-wider">{{ $t('creditcardcalculator.table_effective_annual_fee') }}</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="card in results.cards" :key="card.name" class="hover:bg-gray-100">
+            <tr v-for="card in results.cards" :key="card.name" :class="[!card.active ? 'bg-gray-200 italic hover:bg-gray-300' : 'hover:bg-gray-100']">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ card.rank }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ card.name }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ card.name }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 <div class="flex items-center gap-2">
                   <img :src="card.logo" :alt="card.bank" class="h-[1em] w-auto" />
                   <span>{{ card.bank }}</span>
                 </div>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ card.totalAeromexicoPoints.toLocaleString() }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ card.costPerPoint }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ card.effectiveAnnualFeeMXN.toLocaleString() }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">{{ card.totalAeromexicoPoints.toLocaleString() }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">{{ card.costPerPoint }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-right">{{ card.effectiveAnnualFeeMXN.toLocaleString() }}</td>
             </tr>
           </tbody>
         </table>
@@ -111,6 +115,7 @@ const params = ref({
   },
   usdToMxnRate: 17.01,
   includeWelcomeOffers: false,
+  includeInactiveCards: false,
 });
 
 const totalSpending = computed(() => {

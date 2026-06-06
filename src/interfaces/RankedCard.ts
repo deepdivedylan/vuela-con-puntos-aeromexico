@@ -12,4 +12,5 @@ export default interface RankedCard {
     costPerPoint: string;
     totalCost: number;
     rank: number;
+    active: boolean;
 }

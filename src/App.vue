@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8 max-w-5xl mx-auto">
+  <div class="p-8 max-w-7xl mx-auto">
     <div class="flex justify-end mb-4">
       <LocaleSelect />
     </div>

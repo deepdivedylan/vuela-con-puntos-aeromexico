@@ -40,7 +40,8 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             annualFee: 748,
             feeCurrency: "MXN",
             directAeromexico: false,
-            categoryBased: false
+            categoryBased: false,
+            active: true
         },
         {
             name: "BBVA Oro",
@@ -50,7 +51,8 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             annualFee: 1151,
             feeCurrency: "MXN",
             directAeromexico: false,
-            categoryBased: false
+            categoryBased: false,
+            active: true
         },
         {
             name: "BBVA Platino",
@@ -60,7 +62,8 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             annualFee: 2579,
             feeCurrency: "MXN",
             directAeromexico: false,
-            categoryBased: false
+            categoryBased: false,
+            active: true
         },
         {
             name: "BBVA Negra",
@@ -70,7 +73,8 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             annualFee: 6247,
             feeCurrency: "MXN",
             directAeromexico: false,
-            categoryBased: false
+            categoryBased: false,
+            active: true
         },
         {
             name: "Santander Aeroméxico Blanca",
@@ -80,6 +84,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: true,
             categoryBased: true,
+            active: false,
             earnRatesByCategory: {
                 aeromexicoTickets: 1.6,
                 other: 1
@@ -101,6 +106,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: true,
             categoryBased: true,
+            active: false,
             earnRatesByCategory: {
                 aeromexicoTickets: 2,
                 other: 1.6
@@ -122,6 +128,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: true,
             categoryBased: true,
+            active: false,
             earnRatesByCategory: {
                 aeromexicoTickets: 3,
                 other: 2
@@ -144,6 +151,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: false,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 3,
                 airlineTickets: 3,
@@ -161,6 +169,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: false,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 1,
                 airlineTickets: 1,
@@ -178,6 +187,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: false,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 1,
                 airlineTickets: 1,
@@ -195,6 +205,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "MXN",
             directAeromexico: false,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 1,
                 airlineTickets: 1,
@@ -212,6 +223,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "USD",
             directAeromexico: true,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 2.4,
                 other: 1.6
@@ -232,6 +244,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "USD",
             directAeromexico: true,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 3.2,
                 foreignSpending: 1.84,
@@ -253,6 +266,7 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             feeCurrency: "USD",
             directAeromexico: true,
             categoryBased: true,
+            active: true,
             earnRatesByCategory: {
                 aeromexicoTickets: 4.8,
                 foreignSpending: 2.08,
@@ -268,8 +282,11 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
         }
     ];
 
+    const includeInactiveCards = params.includeInactiveCards || false;
+    const cardsToProcess = includeInactiveCards ? cards : cards.filter(card => card.active);
+
     // Calculate results for each card
-    const results = cards.map(card => {
+    const results = cardsToProcess.map(card => {
         let totalPoints = 0;
 
         // Convert annual fee to MXN if it's in USD
@@ -386,7 +403,8 @@ export default (params: CreditCardEfficiencyParams) : CreditCardEfficiencyResult
             welcomeOfferCashback: welcomeOfferCashback,
             totalAeromexicoPoints: Math.round(totalPoints),
             costPerPoint: costPerPoint === Infinity ? "Infinity" : costPerPoint.toFixed(2),
-            totalCost: totalCost
+            totalCost: totalCost,
+            active: card.active
         };
     });
 

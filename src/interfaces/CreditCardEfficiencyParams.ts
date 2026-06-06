@@ -4,4 +4,5 @@ export default interface CreditCardEfficiencyParams {
     spending: SpendingByCategory;
     usdToMxnRate?: number;
     includeWelcomeOffers?: boolean;
+    includeInactiveCards?: boolean;
 }
