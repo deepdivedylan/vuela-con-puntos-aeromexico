@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent class="print:hidden">
       <div class="grid grid-cols-1 gap-6">
         <fieldset class="border p-4 rounded-md">
           <legend class="text-lg font-semibold px-2">{{ $t('creditcardcalculator.spending_title') }}</legend>
@@ -59,8 +59,14 @@
       </div>
     </form>
 
-    <div v-if="totalSpending > 0 && results" class="mt-10">
-      <h2 class="text-xl font-bold mb-4">{{ $t('creditcardcalculator.results_title') }}</h2>
+    <div v-if="totalSpending > 0 && results" class="mt-10 print:hidden">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-bold">{{ $t('creditcardcalculator.results_title') }}</h2>
+        <button @click="printResults" class="p-2 text-2xl hover:scale-110 transition-transform focus:outline-none" :title="$t('creditcardcalculator.print_results')">
+          🖨️
+          <span class="sr-only">{{ $t('creditcardcalculator.print_results') }}</span>
+        </button>
+      </div>
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -91,15 +97,17 @@
         </table>
       </div>
     </div>
-    <div v-else class="mt-10 text-center">
+    <div v-else class="mt-10 text-center print:hidden">
       <h2 class="text-2xl font-semibold text-gray-600">{{ $t('creditcardcalculator.start_journey_prompt') }}</h2>
     </div>
+    <PrintableView v-if="totalSpending > 0 && results" :results="results" :params="params" :totalSpending="totalSpending" />
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 import calculateCreditCardEfficiency from '../calculateCreditCardEfficiency.ts';
 import type CreditCardEfficiencyResult from '../interfaces/CreditCardEfficiencyResult.ts';
+import PrintableView from './PrintableView.vue';
 
 const apiRate = ref(17.01);
 const apiTimestamp = ref(new Date(2063, 3, 5).getTime() / 1000);
@@ -159,7 +167,24 @@ onMounted(async () => {
     console.error('Failed to fetch exchange rate:', error);
     // Fallback to default values if API fails
   }
+
+  const handlePrintShortcut = (e: KeyboardEvent) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+      e.preventDefault();
+      printResults();
+    }
+  };
+
+  window.addEventListener('keydown', handlePrintShortcut);
+
+  onUnmounted(() => {
+    window.removeEventListener('keydown', handlePrintShortcut);
+  });
 });
+
+const printResults = () => {
+  window.print();
+};
 
 const results = ref<CreditCardEfficiencyResult | null>(null);
 
