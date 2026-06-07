@@ -62,10 +62,19 @@
     <div v-if="totalSpending > 0 && results" class="mt-10 print:hidden">
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-xl font-bold">{{ $t('creditcardcalculator.results_title') }}</h2>
-        <button @click="printResults" class="p-2 text-2xl hover:scale-110 transition-transform focus:outline-none" :title="$t('creditcardcalculator.print_results')">
-          🖨️
-          <span class="sr-only">{{ $t('creditcardcalculator.print_results') }}</span>
-        </button>
+        <div class="relative flex items-center gap-2">
+          <button @click="shareResults" class="p-2 text-2xl hover:scale-110 transition-transform focus:outline-none" :title="$t('creditcardcalculator.share_results')">
+            🔗
+            <span class="sr-only">{{ $t('creditcardcalculator.share_results') }}</span>
+          </button>
+          <div v-if="showCopiedMessage" class="absolute top-full left-0 mt-1 w-max bg-gray-800 text-white text-xs rounded py-1 px-2 z-10 animate-fade-in-out">
+            {{ $t('creditcardcalculator.link_copied') }}
+          </div>
+          <button @click="printResults" class="p-2 text-2xl hover:scale-110 transition-transform focus:outline-none" :title="$t('creditcardcalculator.print_results')">
+            🖨️
+            <span class="sr-only">{{ $t('creditcardcalculator.print_results') }}</span>
+          </button>
+        </div>
       </div>
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
@@ -112,29 +121,50 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, onUnmounted } from 'vue';
+import { ref, onMounted, computed, onUnmounted, watch } from 'vue';
 import calculateCreditCardEfficiency from '../calculateCreditCardEfficiency.ts';
 import type CreditCardEfficiencyResult from '../interfaces/CreditCardEfficiencyResult.ts';
 import PrintableView from './PrintableView.vue';
 import { Destino } from '../interfaces/Destino.ts';
 import { redemptionsData } from '../data/redemptions.ts';
+import { useUrlSearchParams } from '@vueuse/core';
 
 const apiRate = ref(17.01);
 const apiTimestamp = ref(new Date(2063, 3, 5).getTime() / 1000);
 
+const urlParams = useUrlSearchParams('history', { removeNullishValues: true });
+const showCopiedMessage = ref(false);
+
+const sanitizeInput = (val: any) => {
+  const num = Number(val);
+  return (isNaN(num) || num < 0) ? 0 : num;
+};
+
 const params = ref({
   spending: {
-    aeromexicoTickets: 0,
-    airlineTickets: 0,
-    foreignSpending: 0,
-    restaurants: 0,
-    hotels: 0,
-    other: 0,
+    aeromexicoTickets: sanitizeInput(urlParams.aeromexicoTickets),
+    airlineTickets: sanitizeInput(urlParams.airlineTickets),
+    foreignSpending: sanitizeInput(urlParams.foreignSpending),
+    restaurants: sanitizeInput(urlParams.restaurants),
+    hotels: sanitizeInput(urlParams.hotels),
+    other: sanitizeInput(urlParams.other),
   },
-  usdToMxnRate: 17.01,
-  includeWelcomeOffers: false,
-  includeInactiveCards: false,
+  usdToMxnRate: Number(urlParams.usdToMxnRate) || 17.01,
+  includeWelcomeOffers: urlParams.includeWelcomeOffers === 'true',
+  includeInactiveCards: urlParams.includeInactiveCards === 'true',
 });
+
+watch(params, (val) => {
+  if (val.spending.aeromexicoTickets) urlParams.aeromexicoTickets = String(val.spending.aeromexicoTickets); else delete urlParams.aeromexicoTickets;
+  if (val.spending.airlineTickets) urlParams.airlineTickets = String(val.spending.airlineTickets); else delete urlParams.airlineTickets;
+  if (val.spending.foreignSpending) urlParams.foreignSpending = String(val.spending.foreignSpending); else delete urlParams.foreignSpending;
+  if (val.spending.restaurants) urlParams.restaurants = String(val.spending.restaurants); else delete urlParams.restaurants;
+  if (val.spending.hotels) urlParams.hotels = String(val.spending.hotels); else delete urlParams.hotels;
+  if (val.spending.other) urlParams.other = String(val.spending.other); else delete urlParams.other;
+  if (val.usdToMxnRate !== apiRate.value) urlParams.usdToMxnRate = String(val.usdToMxnRate); else delete urlParams.usdToMxnRate;
+  if (val.includeWelcomeOffers) urlParams.includeWelcomeOffers = 'true'; else delete urlParams.includeWelcomeOffers;
+  if (val.includeInactiveCards) urlParams.includeInactiveCards = 'true'; else delete urlParams.includeInactiveCards;
+}, { deep: true });
 
 const totalSpending = computed(() => {
   return Object.values(params.value.spending).reduce((sum, value) => sum + (Number(value) || 0), 0);
@@ -172,10 +202,16 @@ onMounted(async () => {
     apiRate.value = data.rate;
     // The timestamp is a Unix timestamp (seconds).
     apiTimestamp.value = data.timestamp;
-    params.value.usdToMxnRate = data.rate;
+    if (!urlParams.usdToMxnRate) {
+      params.value.usdToMxnRate = data.rate;
+    }
   } catch (error) {
     console.error('Failed to fetch exchange rate:', error);
     // Fallback to default values if API fails
+  }
+
+  if (totalSpending.value > 0) {
+    calculate();
   }
 
   const handlePrintShortcut = (e: KeyboardEvent) => {
@@ -194,6 +230,20 @@ onMounted(async () => {
 
 const printResults = () => {
   window.print();
+};
+
+const shareResults = async () => {
+  const url = new URL(window.location.href);
+  url.searchParams.delete('usdToMxnRate');
+  try {
+    await navigator.clipboard.writeText(url.href);
+    showCopiedMessage.value = true;
+    setTimeout(() => {
+      showCopiedMessage.value = false;
+    }, 5000);
+  } catch (err) {
+    console.error('Failed to copy link: ', err);
+  }
 };
 
 const results = ref<CreditCardEfficiencyResult | null>(null);
