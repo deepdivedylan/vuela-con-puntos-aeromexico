@@ -30,7 +30,9 @@
     "start_journey_prompt": "¿Listo para volar? ¡Ingresa tus gastos para comenzar!",
     "exchange_rate_info": "1 USD = {apiRate} MXN (hace {timeElapsed} {timeUnit})",
     "time_unit_hours": "hora | horas",
-    "time_unit_days": "día | días"
+    "time_unit_days": "día | días",
+    "flight_suggestion_both": "Usando la tarjeta #1 ({bestCard}), puedes volar hasta {turistaDestination} en clase turista o {premierDestination} en Clase Premier.",
+    "flight_suggestion_economy_only": "Usando la tarjeta #1 ({bestCard}), puedes volar hasta {turistaDestination} en clase turista."
   },
   "introduction": {
     "what_is_this": "¿Qué es ésto?",

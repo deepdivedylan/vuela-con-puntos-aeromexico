@@ -96,6 +96,14 @@
           </tbody>
         </table>
       </div>
+      <p v-if="flightSuggestion" class="mt-6 text-center text-lg text-gray-700 italic">
+        <template v-if="flightSuggestion.premierDestination">
+          {{ $t('creditcardcalculator.flight_suggestion_both', { bestCard: flightSuggestion.bestCardName, turistaDestination: $i18n.locale === 'es' ? flightSuggestion.turistaDestination.es : flightSuggestion.turistaDestination.en, premierDestination: $i18n.locale === 'es' ? flightSuggestion.premierDestination.es : flightSuggestion.premierDestination.en }) }}
+        </template>
+        <template v-else>
+          {{ $t('creditcardcalculator.flight_suggestion_economy_only', { bestCard: flightSuggestion.bestCardName, turistaDestination: $i18n.locale === 'es' ? flightSuggestion.turistaDestination.es : flightSuggestion.turistaDestination.en }) }}
+        </template>
+      </p>
     </div>
     <div v-else class="mt-10 text-center print:hidden">
       <h2 class="text-2xl font-semibold text-gray-600">{{ $t('creditcardcalculator.start_journey_prompt') }}</h2>
@@ -108,6 +116,8 @@ import { ref, onMounted, computed, onUnmounted } from 'vue';
 import calculateCreditCardEfficiency from '../calculateCreditCardEfficiency.ts';
 import type CreditCardEfficiencyResult from '../interfaces/CreditCardEfficiencyResult.ts';
 import PrintableView from './PrintableView.vue';
+import { Destino } from '../interfaces/Destino.ts';
+import { redemptionsData } from '../data/redemptions.ts';
 
 const apiRate = ref(17.01);
 const apiTimestamp = ref(new Date(2063, 3, 5).getTime() / 1000);
@@ -191,4 +201,50 @@ const results = ref<CreditCardEfficiencyResult | null>(null);
 function calculate() {
   results.value = calculateCreditCardEfficiency(params.value);
 }
+
+const priorityDestinations = [
+  Destino.MEXICO,
+  Destino.NORTEAMERICA_1,
+  Destino.NORTEAMERICA_2,
+  Destino.AMERICA_CENTRAL_Y_EL_CARIBE,
+  Destino.SUDAMERICA_NORTE,
+  Destino.SUDAMERICA_SUR,
+  Destino.NORESTE_DE_ASIA,
+  Destino.EUROPA
+];
+
+const flightSuggestion = computed(() => {
+  if (!results.value || !results.value.cards || results.value.cards.length === 0) return null;
+  
+  const bestCard = results.value.cards[0];
+  if (!bestCard) return null;
+  
+  const points = bestCard.totalAeromexicoPoints;
+  
+  let maxTurista = null;
+  let maxPremier = null;
+
+  for (let i = priorityDestinations.length - 1; i >= 0; i--) {
+    const dest = priorityDestinations[i];
+    const data = redemptionsData.find(r => r.destinoEnum === dest);
+    if (!data) continue;
+
+    if (!maxTurista && points >= data.cabina_turista.temporada_baja) {
+      maxTurista = data.destino;
+    }
+    if (!maxPremier && points >= data.cabina_premier.temporada_baja) {
+      maxPremier = data.destino;
+    }
+    
+    if (maxTurista && maxPremier) break;
+  }
+
+  if (!maxTurista) return null;
+
+  return {
+    bestCardName: bestCard.name,
+    turistaDestination: maxTurista,
+    premierDestination: maxPremier
+  };
+});
 </script>

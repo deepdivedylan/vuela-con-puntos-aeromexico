@@ -5,6 +5,7 @@
     </div>
     <Introduction />
     <CreditCardCalculator />
+    <RedemptionsTable />
     <Footer />
   </div>
 </template>
@@ -12,5 +13,6 @@
 import CreditCardCalculator from './components/CreditCardCalculator.vue';
 import Introduction from './components/Introduction.vue';
 import LocaleSelect from './components/LocaleSelect.vue';
+import RedemptionsTable from './components/RedemptionsTable.vue';
 import Footer from './components/Footer.vue';
 </script>

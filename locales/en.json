@@ -30,7 +30,9 @@
     "start_journey_prompt": "Ready to fly? Enter your spending to begin!",
     "exchange_rate_info": "1 USD = {apiRate} MXN ({timeElapsed} {timeUnit} ago)",
     "time_unit_hours": "hour | hours",
-    "time_unit_days": "day | days"
+    "time_unit_days": "day | days",
+    "flight_suggestion_both": "Using the #1 ranked card {bestCard}, you can fly as far as {turistaDestination} in economy or {premierDestination} in Clase Premier.",
+    "flight_suggestion_economy_only": "Using the #1 ranked card {bestCard}, you can fly as far as {turistaDestination} in economy."
   },
   "introduction": {
     "what_is_this": "What is this?",
