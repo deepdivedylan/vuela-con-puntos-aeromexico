@@ -259,8 +259,8 @@ const priorityDestinations = [
   Destino.AMERICA_CENTRAL_Y_EL_CARIBE,
   Destino.SUDAMERICA_NORTE,
   Destino.SUDAMERICA_SUR,
-  Destino.NORESTE_DE_ASIA,
-  Destino.EUROPA
+  Destino.EUROPA,
+  Destino.NORESTE_DE_ASIA
 ];
 
 const flightSuggestion = computed(() => {

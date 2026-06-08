@@ -36,6 +36,7 @@
           </tr>
         </tbody>
       </table>
+      <p class="px-4 py-4 text-sm text-gray-700">{{ $i18n.locale === 'es' ? 'Fuente' : 'Source' }}: <a href="https://www.aeromexico.com/es-mx/aeromexico-rewards/boleto-rewards">Aeroméxico Rewards</a></p>
     </div>
   </div>
 </template>
